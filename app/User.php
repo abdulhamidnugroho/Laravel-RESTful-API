@@ -51,20 +51,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function setNameAttribute($name)
-    {
-        $this->attribute['name'] = strtolower($name);
-    }
+    // public function setNameAttribute($name)
+    // {
+    //     $this->attribute['name'] = strtolower($name);
+    // }
 
-    public function getNameAttribute($name)
-    {
-        return ucwords($name);
-    }
+    // public function getNameAttribute($name)
+    // {
+    //     return ucwords($name);
+    // }
 
-    public function setEmailAttribute($email)
-    {
-        $this->attribute['email'] = strtolower($email);
-    }
+    // public function setEmailAttribute($email)
+    // {
+    //     $this->attribute['email'] = strtolower($email);
+    // }
 
     public function isVerified()
     {

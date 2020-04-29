@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class CategoryController extends ApiController
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.

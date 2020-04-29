@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Traits\ApiResponser;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    use ApiResponser;
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +57,7 @@ class UserController extends Controller
 
         $user = User::create($data);
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -67,7 +70,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
     /**
@@ -134,7 +137,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 
     /**
@@ -149,6 +152,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
     }
 }
