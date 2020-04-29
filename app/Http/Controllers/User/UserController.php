@@ -124,7 +124,7 @@ class UserController extends Controller
         {
             if (!$user->isVerified())
             {
-                return response()->json(['error' => 'Only Verified User Can Modifiy the Admin Field', 'code' => 409], 409);
+                return $this->errorResponse('Only Verified User Can Modifiy the Admin Field', 409);
             }
 
             $user->admin = $request->admin;
@@ -132,7 +132,7 @@ class UserController extends Controller
 
         if (!$user->isDirty())
         {
-            return response()->json(['error' => 'You need to specify a different value to update', 'code' => 422], 422);
+            return $this->errorResponse('You need to specify a different value to update', 422);
         }
 
         $user->save();
