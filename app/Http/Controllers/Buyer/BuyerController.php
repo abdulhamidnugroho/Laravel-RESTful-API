@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Buyer;
 use App\Buyer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class BuyerController extends Controller
 {
+    use ApiResponser;
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +19,7 @@ class BuyerController extends Controller
     {
         $buyers = Buyer::has('transactions')->get();
 
-        return response()->json(['data' => $buyers], 200);
+        return $this->showAll($buyers);
     }
 
     /**
@@ -49,9 +51,9 @@ class BuyerController extends Controller
      */
     public function show($id)
     {
-        $buyers = Buyer::has('transactions')->findOrFail($id);
+        $buyer = Buyer::has('transactions')->findOrFail($id);
 
-        return response()->json(['data' => $buyers], 200);
+        return $this->showOne($buyer);
     }
 
     /**
