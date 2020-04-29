@@ -6,6 +6,7 @@ use App\Transaction;
 use App\User;
 use App\Seller;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,10 +26,10 @@ class DatabaseSeeder extends Seeder
         DB::table('category_product')->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $usersQuantity = 1000;
+        $usersQuantity = 500;
         $categoriesQuantity = 30;
-        $productsQuantity = 1000;
-        $transactionsQuantity = 1000;
+        $productsQuantity = 500;
+        $transactionsQuantity = 500;
 
         factory(User::class, $usersQuantity)->create();
 
