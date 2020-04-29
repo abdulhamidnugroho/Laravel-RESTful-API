@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Buyer;
 use App\Buyer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class BuyerController extends Controller
 {
+    use ApiResponser;
     /**
      * Display a listing of the resource.
      *

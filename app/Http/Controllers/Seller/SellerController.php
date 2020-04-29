@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Seller;
 use App\Http\Controllers\Controller;
 use App\Seller;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponser;
 
 class SellerController extends Controller
 {
+    use ApiResponser;
     /**
      * Display a listing of the resource.
      *
