@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class CategoryProductController extends Controller
+class CategoryTransactionController extends Controller
 {
     use ApiResponser;
 
@@ -18,9 +18,24 @@ class CategoryProductController extends Controller
      */
     public function index(Category $category)
     {
-        $products = $category->products;
+        $transactions = $category->products()
+        ->whereHas('transactions')
+        ->with('transactions')
+        ->get()
+        ->pluck('transactions')
+        ->collapse();
 
-        return $this->showAll($products);
+        return $this->showAll($transactions);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**

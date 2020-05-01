@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class CategoryProductController extends Controller
+class CategoryBuyerController extends Controller
 {
     use ApiResponser;
 
@@ -18,9 +18,17 @@ class CategoryProductController extends Controller
      */
     public function index(Category $category)
     {
-        $products = $category->products;
+        $buyers = $category->products()
+        ->whereHas('transactions')
+        ->with('transactions.buyer')
+        ->get()
+        ->pluck('transactions')
+        ->collapse()
+        ->pluck('buyer')
+        ->unique('id')
+        ->values();
 
-        return $this->showAll($products);
+        return $this->showAll($buyers);
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class CategoryProductController extends Controller
+class CategorySellerController extends Controller
 {
     use ApiResponser;
 
@@ -18,9 +18,14 @@ class CategoryProductController extends Controller
      */
     public function index(Category $category)
     {
-        $products = $category->products;
+        $sellers = $category->products()
+        ->with('seller')
+        ->get()
+        ->pluck('seller')
+        ->unique('id')
+        ->values();
 
-        return $this->showAll($products);
+        return $this->showAll($sellers);
     }
 
     /**
