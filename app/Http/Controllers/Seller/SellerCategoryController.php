@@ -7,7 +7,7 @@ use App\Seller;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class SellerTransactionController extends Controller
+class SellerCategoryController extends Controller
 {
     use ApiResponser;
 
@@ -18,24 +18,16 @@ class SellerTransactionController extends Controller
      */
     public function index(Seller $seller)
     {
-        $transactions = $seller->products()
-        ->whereHas('transactions')
-        ->with('transactions')
+        $categories = $seller->products()
+        ->whereHas('categories')
+        ->with('categories')
         ->get()
-        ->pluck('transactions')
-        ->collapse();
+        ->pluck('categories')
+        ->collapse()
+        ->unique('id')
+        ->values();
 
-        return $this->showAll($transactions);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->showAll($categories);
     }
 
     /**
