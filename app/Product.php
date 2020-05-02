@@ -11,7 +11,7 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 
     const AVAILABLE_PRODUCT = 'available';
-    const UNAVAILABLE_PRODUCT = 'unavialable';
+    const UNAVAILABLE_PRODUCT = 'unavailable';
 
     protected $fillable = [
         'name',
