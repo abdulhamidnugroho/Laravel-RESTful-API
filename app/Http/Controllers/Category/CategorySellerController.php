@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Category;
 
+use App\Category;
 use App\Http\Controllers\Controller;
-use App\Product;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategorySellerController extends Controller
 {
     use ApiResponser;
 
@@ -16,11 +16,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Category $category)
     {
-        $products = Product::all();
+        $sellers = $category->products()
+        ->with('seller')
+        ->get()
+        ->pluck('seller')
+        ->unique('id')
+        ->values();
 
-        return $this->showAll($products);
+        return $this->showAll($sellers);
     }
 
     /**
@@ -37,22 +42,33 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Category $category)
     {
-        return $this->showOne($product);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Category $category)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -60,10 +76,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Category $category)
     {
         //
     }

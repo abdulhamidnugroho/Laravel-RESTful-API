@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Buyer;
 
+use App\Buyer;
 use App\Http\Controllers\Controller;
-use App\Product;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class BuyerSellerController extends Controller
 {
     use ApiResponser;
 
@@ -16,11 +16,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Buyer $buyer)
     {
-        $products = Product::all();
+        $sellers = $buyer->transactions()->with('product.seller')
+        ->get()
+        ->pluck('product.seller')
+        ->unique('id')
+        ->values();
 
-        return $this->showAll($products);
+        return $this->showAll($sellers);
     }
 
     /**
@@ -37,22 +41,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Buyer  $buyer
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Buyer $buyer)
     {
-        return $this->showOne($product);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Buyer  $buyer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Buyer $buyer)
     {
         //
     }
@@ -60,10 +64,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Buyer  $buyer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Buyer $buyer)
     {
         //
     }

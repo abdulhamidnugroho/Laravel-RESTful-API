@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\Controller;
-use App\Product;
 use App\Traits\ApiResponser;
+use App\Transaction;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class TransactionSellerController extends Controller
 {
     use ApiResponser;
 
@@ -16,11 +16,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Transaction $transaction)
     {
-        $products = Product::all();
+        $seller = $transaction->product->seller;
 
-        return $this->showAll($products);
+        return $this->showOne($seller);
     }
 
     /**
@@ -37,22 +37,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Transaction $transaction)
     {
-        return $this->showOne($product);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -60,10 +60,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Transaction $transaction)
     {
         //
     }

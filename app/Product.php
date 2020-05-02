@@ -11,7 +11,7 @@ class Product extends Model
     protected $dates = ['deleted_at'];
 
     const AVAILABLE_PRODUCT = 'available';
-    const UNAVAILABLE_PRODUCT = 'unavialable';
+    const UNAVAILABLE_PRODUCT = 'unavailable';
 
     protected $fillable = [
         'name',
@@ -20,6 +20,10 @@ class Product extends Model
         'status',
         'image',
         'seller_id'
+    ];
+
+    protected $hidden = [
+        'pivot'
     ];
 
     public function isAvailable()
