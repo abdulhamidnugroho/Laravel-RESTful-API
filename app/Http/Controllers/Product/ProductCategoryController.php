@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Traits\ApiResponser;
@@ -21,16 +22,6 @@ class ProductCategoryController extends Controller
         $categories = $product->categories;
 
         return $this->showAll($categories);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -56,26 +47,18 @@ class ProductCategoryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, Category $category)
     {
-        //
+        // attach, sync, syncWithoutDetachs
+        $product->categories()->attach([$category->id]);
+
+        return $this->showAll($product->categories);
     }
 
     /**
