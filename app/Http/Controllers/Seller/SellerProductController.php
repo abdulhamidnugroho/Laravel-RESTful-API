@@ -8,6 +8,7 @@ use App\Seller;
 use App\Traits\ApiResponser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends Controller
@@ -119,6 +120,8 @@ class SellerProductController extends Controller
         $this->checkSeller($seller, $product);
 
         $product->delete();
+
+        Storage::delete($product->image);
 
         return $this->showOne($product);
     }
