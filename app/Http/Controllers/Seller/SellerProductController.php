@@ -99,6 +99,13 @@ class SellerProductController extends Controller
             }
         }
 
+        if ($request->hasFile('image'))
+        {
+            Storage::delete($product->image);
+
+            $product->image = $request->image->store('path');
+        }
+
         if ($product->isClean())
         {
             return $this->errorResponse('You need to specify a different value to update', 422);
