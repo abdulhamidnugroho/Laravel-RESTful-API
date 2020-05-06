@@ -28,10 +28,10 @@ class UserCreated extends Mailable
      *
      * @return $this
      */
-    public function build(User $user)
+    public function build()
     {
         // return $this->view('emails.welcome');
-        return Log::info('Verify.', route('verify', $user->verification_token));
-        // return $this->text('emails.welcome');
+        // return Log::info('Verify.', route('verify', $user->verification_token));
+        return $this->text('emails.welcome');
     }
 }
