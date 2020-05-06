@@ -32,6 +32,6 @@ class UserCreated extends Mailable
     {
         // return $this->view('emails.welcome');
         // return Log::info('Verify.', route('verify', $user->verification_token));
-        return $this->text('emails.welcome');
+        return $this->markdown('emails.welcome')->subject('Please confirm your account');
     }
 }
