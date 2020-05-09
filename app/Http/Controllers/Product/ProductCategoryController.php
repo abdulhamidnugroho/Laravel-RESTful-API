@@ -49,14 +49,16 @@ class ProductCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * Add a Category for specific product
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product, Category $category)
     {
-        // attach, sync, syncWithoutDetachs
-        $product->categories()->attach([$category->id]);
+        // attach (add category even duplicate), sync (add a category but delete the others), syncWithoutDetachs
+        $product->categories()->syncWithoutDetaching([$category->id]);
 
         return $this->showAll($product->categories);
     }
@@ -67,8 +69,16 @@ class ProductCategoryController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product, Category $category)
     {
-        //
+        if (!$product->categories()->find($category->id))
+        {
+            return $this->errorResponse('The specified category is not a category of this product', 404);
+        }
+
+        // detach (delete the category from product)
+        $product->categories()->detach($category->id);
+
+        return $this->showAll($product->categories);
     }
 }
