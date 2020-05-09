@@ -119,6 +119,13 @@ trait ApiResponser
     protected function cacheResponse($data)
     {
         $url = request()->url();
+        $queryParams = request()->query();
+
+        ksort($queryParams);
+
+        $queryStrings = http_build_query($queryParams);
+
+        $fullUrl = "{$url}?{$queryStrings}";
 
         return Cache::remember($url, 30, function() use ($data) {
             return $data;
