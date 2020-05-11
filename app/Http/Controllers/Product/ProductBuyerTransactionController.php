@@ -7,6 +7,7 @@ use App\Product;
 use App\Seller;
 use App\Traits\ApiResponser;
 use App\Transaction;
+use App\Transformers\TransactionTransformer;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 class ProductBuyerTransactionController extends Controller
 {
     use ApiResponser;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->middleware('transform.input:' . TransactionTransformer::class)->only(['store']);
+    }
 
     /**
      * Display a listing of the resource.
