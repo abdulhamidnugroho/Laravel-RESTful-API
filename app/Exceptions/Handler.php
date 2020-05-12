@@ -153,7 +153,7 @@ class Handler extends ExceptionHandler
 
         if ($this->isFrontend($request))
         {
-            return $request->ajax() ? response()->json($error, 422) : redirect()
+            return $request->ajax() ? response()->json($errors, 422) : redirect()
             ->back()
             ->withInput($request->input())
             ->withErrors($errors);
