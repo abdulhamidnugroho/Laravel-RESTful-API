@@ -12,6 +12,11 @@ class ProductCategoryController extends Controller
 {
     use ApiResponser;
 
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *
