@@ -12,6 +12,11 @@ class SellerBuyerController extends Controller
 {
     use ApiResponser;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *

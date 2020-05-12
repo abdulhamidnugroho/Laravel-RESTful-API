@@ -17,6 +17,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('client.credentials')->only(['resend', 'store']);
+        $this->middleware('auth:api')->except(['resend', 'store', 'verify']);
 
         $this->middleware('transform.input:' . UserTransformer::class)->only(['store', 'update']);
     }
