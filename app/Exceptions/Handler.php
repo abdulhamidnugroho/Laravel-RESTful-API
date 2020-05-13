@@ -137,7 +137,7 @@ class Handler extends ExceptionHandler
             return redirect()->guest('login');
         }
 
-        return $this->errorResponse('Unauthoticated', 401);
+        return $this->errorResponse('Unauthenticated', 401);
     }
 
     /**
