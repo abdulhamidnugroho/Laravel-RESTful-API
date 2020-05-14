@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <personal-access-tokens></personal-access-tokens>
+            <passport-authorized-clients></passport-authorized-clients>
         </div>
     </div>
 </div>

@@ -6,7 +6,8 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Here is your new personal access token. This is the only time it will be shown so don't lose it!
+                            You may now use this token to make API requests.
                     </div>
                 </div>
             </div>
