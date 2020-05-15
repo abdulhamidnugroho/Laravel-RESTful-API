@@ -15,7 +15,8 @@
         "laravel/homestead": "^10.7",
         "laravel/passport": "^9.1",
         "laravel/tinker": "^2.0",
-        "spatie/laravel-fractal": "^5.7"
+        "spatie/laravel-fractal": "^5.7",
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
