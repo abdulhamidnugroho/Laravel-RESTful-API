@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+
 // use Illuminate\Routing\Route;
 
 /*
@@ -76,3 +78,19 @@ Route::name('verify')->get('users/verify/{token}', 'User\UserController@verify')
 Route::name('resend')->get('users/{user}/resend', 'User\UserController@resend');
 
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken');
+
+
+Route::post('login', 'ApiController@login');
+
+Route::post('register', 'ApiController@register');
+
+Route::group(['middleware' => 'auth.jwt'], function () {
+
+    Route::get('logout', 'ApiController@logout');
+
+    Route::get('tasks', 'TaskController@index');
+    Route::get('tasks/{id}', 'TaskController@show');
+    Route::post('tasks', 'TaskController@store');
+    Route::put('tasks/{id}', 'TaskController@update');
+    Route::delete('tasks/{id}', 'TaskController@destroy');
+});
