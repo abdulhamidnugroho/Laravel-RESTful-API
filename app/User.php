@@ -90,6 +90,11 @@ class User extends Authenticatable
         return Str::random(40);
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

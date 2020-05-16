@@ -12,7 +12,7 @@ Thank you for creating account. Please verify your email using this button:
 
 {{ route('verify', $user->verification_token) }} --}}
 
-@component('mail::message')
+{{-- @component('mail::message')
 # Hello {{ $user->name }}
 
 You changed your email. Please use link below:
@@ -23,4 +23,4 @@ Verify Account
 
 Thanks,<br>
 {{ config('app.name') }}
-@endcomponent
+@endcomponent --}}
